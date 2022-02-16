@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package NameNode;
+
+service NameNode{
+    rpc checkNameNodeStatus(msg) returns(msg) {}
+    // for Client
+    rpc bindClient(userInfo) returns(msg) {}
+    rpc register(userInfo) returns(msg) {}
+    rpc pwd(msg) returns(msg) {}
+    rpc mkdir(msg) returns(msg) {}
+    rpc cd(msg) returns(msg) {}
+    rpc upload(fileInfo) returns(instructions) {}
+    rpc delete(fileInfo) returns(msg) {}
+    rpc error(msg) returns(msg) {}
+    rpc download(fileInfo) returns(instructions) {}
+    rpc readfile(fileInfo) returns(msg) {}
+    rpc releasefile(fileInfo) returns(msg) {}
+    rpc ls(msg) returns(msg) {}
+    rpc cp(cpMsg) returns(msg) {}
+    
+    // for DataNode
+    rpc join(dataNodeInfo) returns(msg) {}
+}
+
+message msg {
+    string msg = 1;
+}
+
+message cpMsg{
+    string filename = 1;
+    string current = 2;
+    string to = 3;
+}
+message userInfo{
+    string username = 1;
+    string password = 2;
+}
+
+message fileInfo{
+    string fileName = 1;
+    string to = 2;
+    int64 fileSize = 3;
+    string checksum = 4;
+    bool share = 5;
+}
+
+message instructions{
+    bool allow = 1;
+    string giveTo = 2;
+    int32 chunks = 3;
+    string howTo = 4;
+}
+
+message dataNodeInfo{
+    string nodeName = 1;
+    int32 space = 2;
+}
+
+// python3 -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. NameNode.proto

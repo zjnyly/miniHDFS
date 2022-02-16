@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package DataNode;
+
+service DataNode{
+    rpc heartbeat(msg) returns(msg) {}
+    rpc upload(stream uploadFile) returns(msg) {}
+    rpc replica(stream uploadFile) returns(msg) {}
+    rpc get(msg) returns(stream saveFile) {}
+    rpc remove(msg) returns(msg) {}
+}
+
+message msg {
+    string msg = 1;
+}
+
+message uploadFile{
+    string instructions = 1;
+    bytes buffer = 2;
+}
+
+message saveFile{
+    string fileID = 1;
+    bytes buffer = 2;
+}
