@@ -63,7 +63,7 @@ This is a basic implementation of HDFS(Hadoop Distributed File System) using gRP
 
   ![image-20220216222118461](./pic/image-20220216222118461.png)
 
-* Implemented  `download function
+* Implemented  `download` function
 
   ![image-20220216222153444](./pic/image-20220216222153444.png)
 
